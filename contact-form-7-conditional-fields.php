@@ -183,7 +183,14 @@ function wpcf7cf_enqueue_scripts($cf7form) {
 	global $global_count, $post;
 	$global_count++;
 
-	$unit_tag = 'wpcf7-f'.$cf7form->id().'-o'.$global_count;
+    //INI MOD
+    $search_post = '';
+    if(!empty($post) && !empty($post->ID) && in_the_loop()) {
+        $search_post = '-p' . $post->ID;
+    }
+    
+    $unit_tag = 'wpcf7-f'.$cf7form->id(). $search_post .'-o'.$global_count;
+    //FIN MOD
 
 	$options = array(
 		'form_id' => $cf7form->id(),
